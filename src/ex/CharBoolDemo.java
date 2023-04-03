@@ -17,5 +17,7 @@ public class CharBoolDemo {
     System.out.println("two = " + two);
     System.out.println("cham = " + cham);
     System.out.println("geojit = " + geojit);
+
+    System.out.println("one++ = "+ ++one);
   }
 }
