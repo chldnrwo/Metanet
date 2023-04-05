@@ -1,8 +1,8 @@
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-class Main {
+class BOJ카드정리1미완성 {
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
     int n = in.nextInt();
@@ -29,8 +29,8 @@ class Main {
       for(int j=0;j<n;j++){
         if(i==j) continue; //조커 박스 기존 행은 무시
         if(cnt[j] > 1) rev++;
-          // 2가지 종류 이상의 카드가 각각 1장이상씩 존재하는 경우
-          // 무조건 조커박스 이동해야됨
+        // 2가지 종류 이상의 카드가 각각 1장이상씩 존재하는 경우
+        // 무조건 조커박스 이동해야됨
         else if(cnt[j] == 0) continue; // 아예 빈 상자도 무시
         else{
           // 남는 경우
@@ -46,7 +46,7 @@ class Main {
           if(!flag) rev++; //여전히 flag가 false면 rev++
         }
       }
-      System.out.println(i+" "+rev);
+      //System.out.println(i+" "+rev);
       ans = Math.min(ans, rev);
 
     }

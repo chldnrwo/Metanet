@@ -1,4 +1,4 @@
-package ex;
+package ex1;
 
 public class DataTypeEx {
   public static void main(String[] args) {

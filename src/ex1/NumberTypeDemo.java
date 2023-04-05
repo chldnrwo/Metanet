@@ -1,4 +1,4 @@
-package ex;
+package ex1;
 
 public class NumberTypeDemo {
   public static void main(String[] args) {
