@@ -4,7 +4,13 @@ public class Ball {
 
     private double radius = 2.0;
 
-    double getVolumn(){
+  public Ball() {
+  }
+  public Ball(double radius) {
+    this.radius = radius;
+  }
+
+  public double getVolumn(){
      return 4/3 * 3.14 * radius * radius * radius;
     }
 
