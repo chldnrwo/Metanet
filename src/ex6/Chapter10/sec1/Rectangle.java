@@ -1,6 +1,6 @@
 package ex6.Chapter10.sec1;
 
-public class Rectangle extends Number implements Comparable<Integer> {
+public class Rectangle implements Comparable<Rectangle> {
   private int width, height;
 
   public Rectangle(int width, int height) {
@@ -21,7 +21,7 @@ public class Rectangle extends Number implements Comparable<Integer> {
     return String.format("Rectangle[width=%d, height=%d]", width, height);
   }
   @Override
-  public int compareTo(Integer o) {
-    return Integer.compare(width, o.width);
+  public int compareTo(Rectangle o) {
+    return getArea() - o.getArea();
   }
 }

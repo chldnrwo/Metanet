@@ -1,8 +1,8 @@
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-class Main {
+class BOJ1025 {
   static int n,m,max;
   static String[][] arr;
   static boolean noSqrt = true;
