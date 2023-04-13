@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class ArrayStreamDemo {
   public static void main(String[] args) {
     int[] arr = {1, 2, 3, 4, 5, 6, 7};
-    Stream<Integer> str = list.stream;
+    //Stream<Integer> str = list.stream(arr);
     IntStream stream = Arrays.stream(arr);
 
     Integer[] arr2 = {1,2,3};

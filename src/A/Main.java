@@ -3,68 +3,39 @@ package A;
 import java.util.Scanner;
 
 class Main {
-  static int n,m,max;
-  static String[][] arr;
-  static boolean noSqrt = true;
+  static double[] arr
   public static void main(String[] args) {
-    Scanner in  = new Scanner(System.in);
-
-    n = in.nextInt();
-    m = in.nextInt();
-    max = 0;
-    arr = new String[n][m];
+    Scanner in = new Scanner(System.in);
+    int n = in.nextInt();
+    arr = new double[n];
     for(int i = 0; i < n; i++) {
-      String s = in.next();
-      for(int j = 0; j < m; j++) {
-        arr[i][j] = s.substring(j, j + 1);
-      }
+      arr[i] = in.nextDouble();
     }
 
-    for(int i = 0; i < n; i++) {
-      for(int j = 0; j < m; j++) {
-        bru(i,j);
-      }
-    }
-    if(noSqrt) {
-      System.out.println(-1);
-    }else{
-      System.out.println(max);
-    }
-
-  }
-  public static void bru(int i, int j){
-    for(int k = -n; k < n; k++) { //x 등차
-      for(int l = -m; l < m; l++) { //y 등차
-        if(k==0&&l==0) continue;
-
-        String t="";
-        int i1 = i;
-        int j1 = j;
-        //System.out.println(i1+" "+j1);
-        while(0<=i1 && i1<n && 0<=j1&& j1<m) {
-          t = t+arr[i1][j1];
-          //System.out.println(t);
-          if(isSqrt(Integer.parseInt(t))){
-            noSqrt = false;
-            max = Math.max(max,Integer.parseInt(t));
-          }
-          i1 += k;
-          j1 += l;
+    for(int i = 1; i <= 1000; i++){
+      for(int j = 0; j < n; j++){
+        if(!isPos(arr[j], i)){
+          break;
         }
+        System.out.println(i);
+        System.exit(0);
       }
     }
-    //System.out.println();
+
   }
-  public static boolean isSqrt(long num){
-    double a = Math.sqrt(num);
-    if(a%1==0){
-      return true;
-    }
+  public static boolean isPos(double j, int i){
+    int start = 0;
+    int end = 10 * i;
+    int mid = (start + end) / 2;
+
+
+
+
     return false;
   }
 }
-
 /*
-메모리가 많진 않음
+
+
 
  */
