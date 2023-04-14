@@ -1,47 +1,53 @@
-import java.io.*;
-import java.util.*;
+package A;
 
-class Main_Another {
-  static int s,N,K,R1,R2,C1,C2,sSize;
-  static char[][] arr= new char[51][51];
-  public static void main(String[] args) throws IOException {
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+class Main_Another{
+  static int N, erase, root;
+  static ArrayList<Integer>[] graph;
+  static int[] leaf;
+  public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringTokenizer st = new StringTokenizer(br.readLine());
-    s = Integer.parseInt(st.nextToken());
-    N = Integer.parseInt(st.nextToken());
-    K = Integer.parseInt(st.nextToken());
-    R1 = Integer.parseInt(st.nextToken());
-    R2 = Integer.parseInt(st.nextToken());
-    C1 = Integer.parseInt(st.nextToken());
-    C2 = Integer.parseInt(st.nextToken());
+    StringTokenizer st;
 
-    divide(0,0,(int)Math.pow(N,s),false);
+    N = Integer.parseInt(br.readLine());
 
-    StringBuilder sb = new StringBuilder();
-    for(int i=0; i<=R2-R1; i++){
-      for(int j=0; j<=C2-C1; j++){
-        sb.append(arr[i][j]);
-      }
-      sb.append("\n");
+    st = new StringTokenizer(br.readLine());
+    leaf = new int[N];
+
+    graph = new ArrayList[N];
+    for (int i = 0; i < N; i++) graph[i] = new ArrayList<>();
+
+
+    for (int i = 0; i < N; i++) {
+      int parent = Integer.parseInt(st.nextToken());
+      if (parent == -1) root = i; // 루트는 부모가 없으니 -1로 주어진다!
+      else graph[parent].add(i); // 각 노드의 자식들
     }
-    System.out.println(sb.toString());
-    br.close();
+
+    erase = Integer.parseInt(br.readLine()); // 지울 노드
+
+    solution();
   }
-  static void divide(int x, int y, int size, boolean isBlack){
-    if(x > C2 || x+size <= C1|| y > R2 || y+size <= R1) return;
-    if(size==1){
-      arr[y-R1][x-C1] = isBlack? '1': '0';
-      return;
+  static void solution() {
+    for (int i = 0; i < N; i++) {
+      graph[i].removeIf(integer -> integer == erase); // 그래프 안 지울 노드를 삭제하자!
     }
-    int nSize = size/N;
-    int blackStart = (N-K)/2;
-    int blackEnd = N-blackStart;
-    for(int i=0; i<N; i++){
-      int nY = y+nSize*i;
-      for(int j=0; j<N; j++){
-        int nX = x+nSize*j;
-        divide(nX,nY,nSize, isBlack || (i >= blackStart && i < blackEnd) && (j >= blackStart && j < blackEnd));
-      }
+
+    if (erase != root) DFS(root, -1); // 루트를 지운다면 탐색할 필요는 없다!
+
+    System.out.println(leaf[root]);
+  }
+  static void DFS(int x, int parent) {
+    if (graph[x].isEmpty()) leaf[x] = 1; // 자식이 없다면 그 노드는 단말 노드다!
+
+    for (int y : graph[x]) {
+      if (y == parent) continue; // 위에서부터 내려왔으니 부모는 볼 필요가 없다!
+      DFS(y, x);
+      leaf[x] += leaf[y]; // if문에 의해 1이 누적되었으니 그 값을 부모에 누적하자!
     }
   }
 }

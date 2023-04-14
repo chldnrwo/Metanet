@@ -1,11 +1,11 @@
-package A;
+package Baekjoon;
 
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-class Main {
+class BOJ1213 {
 
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
