@@ -1,42 +1,62 @@
 package A;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 class Main {
+  static int N,M;
+  static char[][] arr;
+  static List<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
-    List<String> list = new ArrayList<String>();
-    String s = in.next();
+    StringBuilder sb = new StringBuilder();
 
-    for(int i = 1; i < s.length(); i++) {
-      for(int j = i+1; j < s.length(); j++) {
-        String s1 = change(s,i,j);
-        list.add(s1);
+    int N = in.nextInt();
+    int M = in.nextInt();
+    arr = new char[N][N];
+    int cnt = M;
+
+    for(int i = 0; i < N; i++) {
+      String s = in.next();
+      for(int j = 0; j < N; j++) {
+        arr[i][j] = s.charAt(j);
       }
     }
-    Collections.sort(list);
-    System.out.println(list.get(0));
-  }
-  public static String change(String s, int i, int j){
-    String s1 = s.substring(0, i);
-    String s2 = s.substring(i, j);
-    String s3 = s.substring(j);
-    s1 = reverse(s1);
-    s2 = reverse(s2);
-    s3 = reverse(s3);
-    return s1+s2+s3;
-  }
-  public static String reverse(String s){
-    StringBuilder sb = new StringBuilder();
-    String s2 = sb.append(s).reverse().toString();
-    return s2;
+    for(int i = 0; i < N; i++) {
+      list.add(new ArrayList<Integer>());
+    }
+    for(int i = 0; i < N; i++) {
+      for(int j = 0; j < N; j++) {
+        if(i<j && arr[i][j]=='Y'){
+          if(cnt==0){
+            break;
+          }
+          list.get(i).add(j);
+          list.get(j).add(i);
+          cnt--;
+        }
+      }
+    }
+
+    if(cnt>0){
+      System.out.println(-1);
+      System.exit(0);
+    }
+    for(int i = 0; i < N; i++){
+      if(list.get(i).isEmpty()){
+        System.out.println(-1);
+        System.exit(0);
+      }
+      sb.append(list.get(i).size()+" ");
+    }
+    System.out.println(sb);
   }
 }
 /*
-끊는 쪽이
+1<=N<=50
+N-1<=M<=1000
 
+그래프이론/그리디/최소신장
 
  */
