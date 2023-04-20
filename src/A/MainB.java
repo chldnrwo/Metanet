@@ -1,9 +1,14 @@
 package A;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.PriorityQueue;
 
-public class Main_Another {
+public class MainB {
   static int[] make_set;
   static int[] ranks;
 
@@ -24,10 +29,10 @@ public class Main_Another {
         }
       }
     }
-    while(!edge_list.isEmpty()){
-      Edge e = edge_list.poll();
-      System.out.println(e.a + " " + e.b);
-    }
+//    while(!edge_list.isEmpty()){
+//      Edge e = edge_list.poll();
+//      System.out.println(e.a + " " + e.b);
+//    }
     int city_cnt = 0;
     if (edge_list.size() >= M) {
       int[] result = new int[N];
@@ -54,7 +59,14 @@ public class Main_Another {
           remain_list.add(edge);
         }
       }
-
+      System.out.println(city_cnt);
+      System.out.println(Arrays.toString(result));
+      for(int i = 0; i < remain_list.size(); i++) {
+        System.out.println(remain_list.get(i).a + " " + remain_list.get(i).b);
+      }
+      //remain엔 제거될 선만 남는다?
+      //이미 이어져있으면 굳이 안 잇는다
+      //이후에 남으면 추가로 잇는다.
       if (city_cnt != N - 1) {
         System.out.println(-1);
       } else {
@@ -120,3 +132,4 @@ public class Main_Another {
     }
   }
 }
+

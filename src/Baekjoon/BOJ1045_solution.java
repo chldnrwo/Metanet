@@ -1,9 +1,13 @@
-package A;
+package Baekjoon;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
-public class Main_Another {
+public class BOJ1045_solution {
   static int[] make_set;
   static int[] ranks;
 
@@ -24,10 +28,7 @@ public class Main_Another {
         }
       }
     }
-    while(!edge_list.isEmpty()){
-      Edge e = edge_list.poll();
-      System.out.println(e.a + " " + e.b);
-    }
+
     int city_cnt = 0;
     if (edge_list.size() >= M) {
       int[] result = new int[N];
