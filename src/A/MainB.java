@@ -1,135 +1,41 @@
 package A;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.HashMap;
 
 public class MainB {
-  static int[] make_set;
-  static int[] ranks;
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
 
-  public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int N = scanner.nextInt();
+    int M = scanner.nextInt();
+    scanner.nextLine();
 
-    String[] input = br.readLine().split(" ");
-    int N = Integer.parseInt(input[0]);
-    int M = Integer.parseInt(input[1]);
-
-    PriorityQueue<Edge> edge_list = new PriorityQueue<>();
-
-    for (int x = 0; x < N; x++) {
-      String temp = br.readLine();
-      for (int y = x + 1; y < N; y++) {
-        if (temp.charAt(y) == 'Y') {
-          edge_list.offer(new Edge(x, y));
-        }
-      }
-    }
-//    while(!edge_list.isEmpty()){
-//      Edge e = edge_list.poll();
-//      System.out.println(e.a + " " + e.b);
-//    }
-    int city_cnt = 0;
-    if (edge_list.size() >= M) {
-      int[] result = new int[N];
-      make_set = new int[N];
-      ranks = new int[N];
-
-      for (int i = 0; i < N; i++) {
-        make_set[i] = i;
-        ranks[i] = 1;
-      }
-
-      List<Edge> remain_list = new ArrayList<>();
-
-      while (!edge_list.isEmpty()) {
-        Edge edge = edge_list.poll();
-        int node_a = edge.a;
-        int node_b = edge.b;
-
-        if (union(node_a, node_b)) {
-          city_cnt++;
-          result[node_b]++;
-          result[node_a]++;
-        } else {
-          remain_list.add(edge);
-        }
-      }
-      System.out.println(city_cnt);
-      System.out.println(Arrays.toString(result));
-      for(int i = 0; i < remain_list.size(); i++) {
-        System.out.println(remain_list.get(i).a + " " + remain_list.get(i).b);
-      }
-      //remain엔 제거될 선만 남는다?
-      //이미 이어져있으면 굳이 안 잇는다
-      //이후에 남으면 추가로 잇는다.
-      if (city_cnt != N - 1) {
-        System.out.println(-1);
-      } else {
-        int remain_cnt = M - city_cnt;
-
-        for (int i = 0; i < remain_cnt; i++) {
-          Edge edge = remain_list.get(i);
-          result[edge.a]++;
-          result[edge.b]++;
-        }
-
-        for (int i = 0; i < N; i++) {
-          System.out.print(result[i] + " ");
-        }
-      }
-    } else {
-      System.out.println(-1);
-    }
-  }
-
-  static int find_parents(int X) {
-    if (X == make_set[X]) {
-      return X;
-    }
-    make_set[X] = find_parents(make_set[X]);
-    return make_set[X];
-  }
-
-  static boolean union(int x, int y) {
-    int X = find_parents(x);
-    int Y = find_parents(y);
-
-    if (X != Y) {
-      if (ranks[X] < ranks[Y]) {
-        int temp = X;
-        X = Y;
-        Y = temp;
-      }
-      make_set[Y] = X;
-      if (ranks[X] == ranks[Y]) {
-        ranks[X]++;
-      }
-      return true;
-    }
-    return false;
-  }
-
-  static class Edge implements Comparable<Edge> {
-    int a;
-    int b;
-
-    public Edge(int a, int b) {
-      this.a = a;
-      this.b = b;
+    String[] table = new String[N];
+    for (int i = 0; i < N; i++) {
+      table[i] = scanner.nextLine();
     }
 
-    @Override
-    public int compareTo(Edge o) {
-      if (this.a == o.a) {
-        return this.b - o.b;
-      }
-      return this.a - o.a;
+    HashMap<Character, Integer> alphabetCounts = new HashMap<>();
+    for (char c = 'A'; c <= 'Z'; c++) {
+      alphabetCounts.put(c, 0);
     }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < M; j++) {
+        char c = table[i].charAt(j);
+        alphabetCounts.put(c, alphabetCounts.get(c) + 1);
+      }
+    }
+
+    for (char c = 'A'; c <= 'Z'; c++) {
+      alphabetCounts.put(c, alphabetCounts.get(c) * (N - 1) * (M - 1));
+    }
+
+    for (char c = 'A'; c <= 'Z'; c++) {
+      System.out.println(c + ": " + alphabetCounts.get(c));
+    }
+
+    scanner.close();
   }
 }
-

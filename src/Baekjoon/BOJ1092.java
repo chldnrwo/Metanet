@@ -1,10 +1,10 @@
-package A;
+package Baekjoon;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class BOJ1092 {
 
   public static void main(String[] args) throws IOException {
 
