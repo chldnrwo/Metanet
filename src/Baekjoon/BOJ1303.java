@@ -1,11 +1,11 @@
 
-package A;
+package Baekjoon;
 
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-class Main {
+class BOJ1303 {
   static char[][] arr;
   static boolean[][] check;
   static int[] ax = {-1, 0, 1, 0};
