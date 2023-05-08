@@ -1,9 +1,9 @@
 
-package A;
+package Baekjoon;
 
 import java.util.*;
 
-class Main {
+class BOJ1325 {
   static List<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
   static int n, m;
   static int max = 0;
