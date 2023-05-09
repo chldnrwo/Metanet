@@ -1,11 +1,11 @@
 
-package A;
+package Baekjoon;
 
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-class Main {
+class BOJ1326 {
   static int n;
   static int[] arr;
   static boolean[] visit;
