@@ -1,9 +1,9 @@
 
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-class Main {
+class BOJ1331 {
   static int[] ax = {-2,-1,1,2,-2,-1,1,2};
   static int[] ay = {1,2,2,1,-1,-2,-2,-1};
   static boolean[][] visit = new boolean[6][6];
