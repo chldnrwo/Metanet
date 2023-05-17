@@ -1,9 +1,9 @@
 
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-class Main {
+class BOJ1091 {
   static int n;
   static int[] P,S;
   public static void main(String[] args) {
