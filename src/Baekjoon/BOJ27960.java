@@ -1,9 +1,9 @@
 
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-class Main {
+class BOJ27960 {
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
 
