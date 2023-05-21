@@ -1,4 +1,4 @@
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 //마름모 구현하고 돌림, 메모리 초과

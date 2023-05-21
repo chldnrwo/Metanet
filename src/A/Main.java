@@ -1,4 +1,4 @@
-package A;
+
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,11 +18,11 @@ public class Main {
       HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
       httpURLConnection.setRequestMethod("POST");
       httpURLConnection.setRequestProperty("Content-Type", "application/json; utf-8");
-      httpURLConnection.setRequestProperty("Authorization", "Bearer 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");
+      httpURLConnection.setRequestProperty("Authorization", "Bearer");
 
       httpURLConnection.setDoOutput(true);
 
-      String input = "{\"model\": \"text-davinci-003\", \"prompt\": \"" + prompt + "\",\"max_tokens\" : 1024}";
+      String input = "{\"model\": \"text-davinci-003\", \"prompt\": \"" + prompt + "\",\"max_tokens\" : 4020}";
 
       try (OutputStream os = httpURLConnection.getOutputStream()) {
         byte[] inputBytes = input.getBytes("utf-8");
@@ -50,7 +50,8 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    String prompt = "골든 리트리버의 역사에 대해 한 페이지 분량으로 설명해줘";
+	System.out.println("im start");
+    String prompt = "골든 리트리버의 역사에 대해 설명해줘";
 
     String res = callChatGPT(prompt);
 
