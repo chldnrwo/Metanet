@@ -1,76 +1,115 @@
+package A;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.Scanner;
+//
+//class Main {
+//  public static void main(String[] args) {
+//    Scanner in = new Scanner(System.in);
+//    List<String> list = new ArrayList<>();
+//
+//    String s = in.nextLine();
+//
+//    String[] lines = s.split(" ");
+//
+//    for(int i =0;i<lines.length;i++){
+//      String s1 = lines[i].replaceAll("\\s", "");
+//      lines[i] = s1;
+//    }
+//    String res = "";
+//    for(int i =0;i<lines.length;i++){
+//      if(!lines[i].equals("")){
+//        String s2 = change(lines[i]);
+//        res += s2+" ";
+//      }
+//    }
+//    res = res.replace("  ", " ");
+//    System.out.println(res);
+//
+//    //System.out.println(Arrays.toString(lines));
+//  }
+//  public static String change(String s){
+//    String s1 = "";
+//    for(int i=0; i<s.length(); i++){
+//      String sp = s.substring(i,i+1);
+//      if(sp.equals(">") || sp.equals("<") ||
+//          sp.equals("(") || sp.equals(")")){
+//       //앞뒤로 체크
+//        s1 = s1 + " " + sp + " ";
+//      }else {
+//        s1 = s1 + sp;
+//      }
+//    }
+//    s1 = s1.replace("&&"," && ");
+//    s1 = s1.replace("||"," || ");
+//
+//    if(s1.substring(0,1).equals(" ")){
+//      s1 = s1.substring(1);
+//    }
+//    if(s1.substring(s1.length()-1,s1.length()).equals(" ")){
+//      s1 = s1.substring(0, s1.length()-1);
+//    }
+//    return s1;
+//  }
+//}
+///*
+//grep skku   <infile> outfile
+//단어중에 앞뒤로 공백이면 제거
+//(exit $?  )||expr $? + $?
+//( exit $? ) || expr $? + $?
+//grep Wall <Makefile|| echo NotSetCflagsWall>outfile
+//grep Wall < Makefile || echo NotSetCflagsWall > outfile
+// */
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+class Main {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    List<String> list = new ArrayList<>();
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+    String s = in.nextLine();
 
-public class Main {
+    String[] lines = s.split(" ");
 
-  private static String callChatGPT(String prompt) {
-    try {
-      URL url = new URL("https://api.openai.com/v1/completions");
-      HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-      httpURLConnection.setRequestMethod("POST");
-      httpURLConnection.setRequestProperty("Content-Type", "application/json; utf-8");
-      httpURLConnection.setRequestProperty("Authorization", "Bearer");
-
-      httpURLConnection.setDoOutput(true);
-
-      String input = "{\"model\": \"text-davinci-003\", \"prompt\": \"" + prompt + "\",\"max_tokens\" : 4020}";
-
-      try (OutputStream os = httpURLConnection.getOutputStream()) {
-        byte[] inputBytes = input.getBytes("utf-8");
-        os.write(inputBytes, 0, inputBytes.length);
-      }
-
-      int resCode = httpURLConnection.getResponseCode();
-      System.out.println("resCode:" + resCode);
-
-      try (BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(), "utf-8"))) {
-        StringBuilder res = new StringBuilder();
-        String resLine = null;
-
-        while ((resLine = br.readLine()) != null) {
-          res.append(resLine.trim());
-        }
-
-        return (res.toString());
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    for (int i = 0; i < lines.length; i++) {
+      lines[i] = lines[i].trim();
     }
 
-    return "";
+    StringBuilder res = new StringBuilder();
+    for (String line : lines) {
+      if (!line.equals("")) {
+        String s2 = change(line);
+        res.append(s2).append(" ");
+      }
+    }
+    res = new StringBuilder(res.toString().replace("  ", " "));
+    System.out.println(res.toString().trim());
   }
 
-  public static void main(String[] args) {
-	System.out.println("im start");
-    String prompt = "골든 리트리버의 역사에 대해 설명해줘";
-
-    String res = callChatGPT(prompt);
-
-    JSONParser jsonParser = new JSONParser();
-
-    try {
-      if (!res.isEmpty()) {
-        Object obj = jsonParser.parse(res);
-        JSONObject jsonObject = (JSONObject) obj;
-        JSONArray choices = (JSONArray) jsonObject.get("choices");
-        JSONObject choice = (JSONObject) choices.get(0);
-        String text = (String) choice.get("text");
-        System.out.println(res);
-        System.out.println(text);
+  public static String change(String s) {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < s.length(); i++) {
+      String sp = s.substring(i, i + 1);
+      if (sp.equals(">") || sp.equals("<") || sp.equals("(") || sp.equals(")")) {
+        sb.append(" ").append(sp).append(" ");
       } else {
-        System.out.println("Response is empty.");
+        sb.append(sp);
       }
-    } catch (Exception e) {
-      e.printStackTrace();
     }
+    sb = new StringBuilder(sb.toString().replace("&&", " && "));
+    sb = new StringBuilder(sb.toString().replace("||", " || "));
+
+    if (sb.charAt(0) == ' ') {
+      sb.deleteCharAt(0);
+    }
+    if (sb.charAt(sb.length() - 1) == ' ') {
+      sb.deleteCharAt(sb.length() - 1);
+    }
+    return sb.toString();
   }
 }
+
