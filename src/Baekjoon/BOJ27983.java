@@ -1,8 +1,8 @@
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-class Main {
+class BOJ27983 {
   static int cnt = 0;
   static int n;
   static int[] xArr;
