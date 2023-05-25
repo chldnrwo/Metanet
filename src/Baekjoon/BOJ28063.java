@@ -1,8 +1,8 @@
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-class Main {
+class BOJ28063 {
   static boolean[][] arr;
   static int n,x,y;
   public static void main(String[] args) {
