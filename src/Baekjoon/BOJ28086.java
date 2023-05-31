@@ -1,8 +1,8 @@
-package A;
+package Baekjoon;
 
 import java.util.Scanner;
 
-public class Main {
+public class BOJ28086 {
   static char[] map = new char[100];
 
   public static void main(String[] args) {

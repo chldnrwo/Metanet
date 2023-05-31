@@ -25,4 +25,5 @@ class BOJ28138 {
 
     System.out.println(sum);
   }
+
 }
