@@ -4,7 +4,7 @@ package Baekjoon;
 //import java.util.List;
 //import java.util.Scanner;
 //
-//class Main {
+//class BOJ2920 {
 //  public static void main(String[] args) {
 //    Scanner in = new Scanner(System.in);
 //    List<String> list = new ArrayList<>();
